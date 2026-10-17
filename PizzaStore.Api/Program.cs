@@ -28,4 +28,11 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/", () => "Hello World!");
 
+app.MapGet("/pizzas", () => new[]
+{
+    new { Id = 1, Name = "Margherita" },
+    new { Id = 2, Name = "Pepperoni" },
+    new { Id = 3, Name = "Hawaiian" }
+});
+
 app.Run();

@@ -59,4 +59,19 @@ app.MapPost("/pizzas", (Pizza pizza) =>
     return Results.Created($"/pizzas/{pizza.Id}", pizza);
 });
 
+
+app.MapPut("/pizzas/{id}", (int id, Pizza updatedPizza) =>
+{
+    var index = pizzas.FindIndex(p => p.Id == id);
+
+    if (index == -1)
+    {
+        return Results.NotFound();
+    }
+
+    pizzas[index] = updatedPizza with { Id = id };
+
+    return Results.NoContent();
+});
+
 app.Run();

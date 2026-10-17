@@ -27,11 +27,11 @@ if (app.Environment.IsDevelopment())
 }
 
 // Temporary sample data
-var pizzas = new[]
+var pizzas = new List<Pizza>
 {
-    new { Id = 1, Name = "Margherita" },
-    new { Id = 2, Name = "Pepperoni" },
-    new { Id = 3, Name = "Hawaiian" }
+    new(1, "Margherita"),
+    new(2, "Pepperoni"),
+    new(3, "Hawaiian")
 };
 
 // Home endpoint
@@ -48,6 +48,15 @@ app.MapGet("/pizzas/{id}", (int id) =>
     return pizza is not null
         ? Results.Ok(pizza)
         : Results.NotFound();
+});
+
+app.MapPost("/pizzas", (Pizza pizza) =>
+{
+    pizza = pizza with { Id = pizzas.Count + 1 };
+
+    pizzas.Add(pizza);
+
+    return Results.Created($"/pizzas/{pizza.Id}", pizza);
 });
 
 app.Run();

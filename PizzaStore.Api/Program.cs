@@ -26,13 +26,28 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapGet("/", () => "Hello World!");
-
-app.MapGet("/pizzas", () => new[]
+// Temporary sample data
+var pizzas = new[]
 {
     new { Id = 1, Name = "Margherita" },
     new { Id = 2, Name = "Pepperoni" },
     new { Id = 3, Name = "Hawaiian" }
+};
+
+// Home endpoint
+app.MapGet("/", () => "Hello World!");
+
+// Get all pizzas
+app.MapGet("/pizzas", () => pizzas);
+
+// Get one pizza by ID
+app.MapGet("/pizzas/{id}", (int id) =>
+{
+    var pizza = pizzas.FirstOrDefault(p => p.Id == id);
+
+    return pizza is not null
+        ? Results.Ok(pizza)
+        : Results.NotFound();
 });
 
 app.Run();

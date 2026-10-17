@@ -74,4 +74,18 @@ app.MapPut("/pizzas/{id}", (int id, Pizza updatedPizza) =>
     return Results.NoContent();
 });
 
+app.MapDelete("/pizzas/{id}", (int id) =>
+{
+    var pizza = pizzas.FirstOrDefault(p => p.Id == id);
+
+    if (pizza is null)
+    {
+        return Results.NotFound();
+    }
+
+    pizzas.Remove(pizza);
+
+    return Results.NoContent();
+});
+
 app.Run();

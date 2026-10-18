@@ -94,3 +94,4 @@ app.MapDelete("/pizzas/{id}", async (int id, PizzaDb db) =>
     return Results.NoContent();
 });
 
+app.Run();

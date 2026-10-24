@@ -1,6 +1,17 @@
 @PizzaStore.Controllers_HostAddress = http://localhost:5108
 
-GET {{PizzaStore.Controllers_HostAddress}}/weatherforecast/
+### Get all pizzas
+GET {{PizzaStore.Controllers_HostAddress}}/pizza
 Accept: application/json
 
-###
+### Get pizza by ID
+GET {{PizzaStore.Controllers_HostAddress}}/pizza/1
+Accept: application/json
+
+### Get a pizza that doesn't exist
+GET {{PizzaStore.Controllers_HostAddress}}/pizza/5
+Accept: application/json
+
+### Existing WeatherForecast endpoint
+GET {{PizzaStore.Controllers_HostAddress}}/weatherforecast/
+Accept: application/json
